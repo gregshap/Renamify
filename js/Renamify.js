@@ -73,3 +73,18 @@ app.controller('mainController', function($scope){
     	$scope.covertRatingtoClass();
     };
 });
+
+//send emails
+app.controller('emailGrabber', ['$scope', function($scope){
+    var endpoint = new Firebase('https://harvester.firebaseio.com/emails');
+    $scope.harvest = function($event){
+        console.log($scope.email);
+        if (!$scope.email){
+            $event.stopPropagation();
+            return false;   
+        }
+        var ref = endpoint.push();
+        ref.set({email:$scope.email})
+        location.href='/';
+    }
+}]);
