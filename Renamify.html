@@ -3,48 +3,73 @@
     <head>
         <meta charset = "utf-8" >
         <title> Renamify.me - please rename my employer! </title>
-        <link rel="stylesheet" href = "Renamify.css" >
+        <link rel="stylesheet" href = "styles.css" >
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-        <script type="text/javascript" src="Renamify.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular-sanitize.js"></script>
+        <script type="text/javascript" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/Renamify.js"></script>
     </head>
 
-    <!-- When this element is clicked, hide the tooltip -->
-    <div id="main" ng-app ng-controller="InlineEditorController" ng-click="hideTooltip()">
+<body class="{{approvalClass}}" ng-app="Renamify" ng-controller="mainController" ng-init="init()">
     
-    	<!-- This is the tooltip. It is shown only when the showtooltip variable is truthful -->
-    	<div class="tooltip" ng-click="$event.stopPropagation()" ng-show="showtooltip">
-    
-    		<!-- ng-model binds the contents of the text field with the "value" model.
-    		 Any changes to the text field will automatically update the value, and
-    		 all other bindings on the page that depend on it.  -->
-    		<input type="text" ng-model="value" />
-    	</div>
-        
+    <div id="wrapper">
+        <div class="container">
+        <section id="welcome" ng-show="showFirstScreen" ng-animate="{show: 'show-animation', hide: 'hide-animation'}">
+            <div class="hero-unit">
+                <h1>Your preliminary poll results were horrible.</h1>
+                <p>We need to make changes to your campaign, fast.</p>
+                <p><a class="btn btn-primary btn-large" ng-click="toggleScreens('first')">Get Started</a></p>
+            </div> <!-- /.hero-unit -->
+        </section> <!-- /#welcome -->
+        <section id="edit" ng-show="showSecondScreen" ng-animate="{show: 'show-animation', hide: 'hide-animation'}">
+            <div class="hero-unit">
+                <div class="row">
+                    <div class="span6">
+                        <h2>{{candidateName}} on the Issues</h2>
+                        <div class="alert">
+                            <p>You should consider changing your name. What does it even mean?</p>
+                            <input type="text" ng-model="candidateName" />
+                        </div>
+<!--                         <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"><span ng-bind-html="alert.msg"></span></alert> -->
+                        <div class="form-horizontal">
+                            <div class="control-group" ng-repeat="issue in issues">
+                                <label class="control-label">{{issue.name}}</label>
+                                <div class="controls">
+                                    <select ng-model="$parent.selectedStances[$index]" ng-change="updateRating()" ng-options="stance.effect as stance.description for stance in issue.stances">
+                                        <option value="">What's your position?</option>
+                                    </select>
+                                </div>
+                            </div> <!-- /.control-group -->
+                        </div><!-- /.form-horizontal -->
+                    </div> <!-- /.span6 -->
+                    <div class="right span3 offset1">
+                        <img src="img/ngpvan_lefty_large.png" />
+                        <div class="approval">{{approvalRating}}% Approval Rating</div>
+                        <div><progress percent="approvalRating" class="progress"></div> <span class="trend {{trend}}">{{trend}}</span>
+                    </div> <!-- /.right -->
+                </div> <!-- /.row -->
+            </div> <!-- /.hero-unit -->
+            <div class="row">
+                <div class="span8 offset2">
+                    <div  class="hero-unit">
+                        <h4>Built a winning campaign? Send it to us.</h4>
+                        <form class="form-horizontal" action="umm">
+                            <input type="email" />
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- /.row -->
+            <footer>
+                <div class="container">
+                    <button class="btn btn-small" ng-click="toggleScreens('second')">Start Over</button>
+                </div>
+            </footer>
+        </section>
+        </div> <!-- /.container -->
+    </div> <!-- /#wrapper --> 
 
-    	<!-- Call a method defined in the InlineEditorController that toggles
-    	 the showtooltip varaible -->
-    	<p class="userchoice" ng-click="toggleTooltip($event)">{{value}}</p>
-        
-        <br/>
-    	
-        <!-- This is the second tooltip. It only shows when the showsecondtooltip variable is truthful -->
-        <div class="tooltip tooltipTLD" ng-click="$event.stopPropagation()" ng-show="showdomaintooltip">
-    
-    		<!-- ng-model binds the contents of the text field with the "value" model.
-    		 Any changes to the text field will automatically update the value, and
-    		 all other bindings on the page that depend on it.  -->
-    		<input type="text" ng-model="domainvalue" />
-    	</div>
-    
-
-
-        <p class="userchoice" ng-click="toggleDomainTooltip($event)">{{domainvalue}}</p>
-        
-        
-        <br/>
-        
-        <p> {{value}}.{{domainvalue}}</p>
-        
-    </div>
+</body>
 
 </html>
