@@ -1,0 +1,80 @@
+@import "variables";
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+// Mixins
+
+@mixin dimensions($width:auto, $height: auto){
+	display: block;
+	height: $height;
+	width: $width;
+}
+
+footer{
+	.btn{
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+html,body{
+	@include dimensions(100%,100%);
+}
+
+section{
+	margin: 60px 0;
+}
+
+.approval{
+	font-size: 85%;
+	font-weight: 600;
+	line-height: 1;
+	margin: $baseLineHeight/2 0;
+}
+
+.form-horizontal{
+	.control-label{
+		width: 33%;
+	}
+	.controls{
+		margin-left: 36%;
+	}
+}
+
+.hero-unit{
+	padding: 30px 60px;
+	.alert{
+		font-size: 75%;
+		line-height: 1.4;
+	}
+}
+
+.right{
+}
+
+.trend{
+	display: block;
+	text-indent: -999em;
+}
+
+/* ==== PAGE STATES BASED ON APPROVAL RATING ==== */
+
+.abominable{
+	@include gradient-vertical($red, darken($red, 15%));
+}
+
+.bad{
+	@include gradient-vertical($orange,darken($orange, 10%));	
+}
+
+.good{
+	@include gradient-vertical($yellow, darken($yellow, 5%));	
+}
+
+.great{
+	@include gradient-vertical($green, darken($green, 15%));	
+}
+
+.start{
+	@include gradient-vertical($blue, darken($blue, 15%));
+}
