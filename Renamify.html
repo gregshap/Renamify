@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="styles.css" >
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script type="text/javascript" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+        <script src='https://cdn.firebase.com/v0/firebase.js'></script>
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/Renamify.js"></script>
     </head>
@@ -68,12 +69,12 @@
 			</div> <!-- /.row -->
             <div class="row">
 				<div class="span4 offset4">
-					<div class="hero-unit">
+					<div class="hero-unit" ng-controller="emailGrabber">
 						<h4>Built a winning campaign? Send it to us.</h4>
-							<form class="form-horizontal" action="umm">
+							<form class="form-horizontal">
 							<div class="input-append">
-								<input type="email" class="span3" />
-								<input type="submit" class="btn btn-primary" value="Submit" />
+								<input type="email" ng-model="email" class="span3" />
+								<input type="submit" class="btn btn-primary" ng-minlength='5' ng-click="harvest($event)" required value="Submit" />
 							</div>
 						</form>
                 	</div> <!-- /.hero-unit -->
