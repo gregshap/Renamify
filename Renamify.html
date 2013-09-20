@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset = "utf-8" >
+        <meta charset="utf-8">
         <title> Renamify.me - please rename my employer! </title>
-        <link rel="stylesheet" href = "styles.css" >
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css" >
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script type="text/javascript" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
@@ -27,51 +28,56 @@
         </section> <!-- /#welcome -->
         <section id="secondScreen" ng-show="showSecondScreen" ng-animate="{show: 'show-animation', hide: 'hide-animation'}">
 			<div class="row">
-				<div class="hero-unit span10 offset1">
-					<div class="row">
-						<div class="span10">
-			                <div class="row">
-			                    <div class="span6">
-			                        <h2><div class="pull-left">{{candidateName}} on the Issues</div> <div ng-hide="showAlert" class="pull-right"><button ng-click="setAlert(true)" class="btn btn-inverse" type="button">Update Name</button></div></h2>
-			                        <div class="alert alert-error" ng-show="showAlert">
-										<a class="close" ng-click="setAlert(false)">&times;</a>
-			                            <p>You should really consider changing your name to something more phonetic.</p>
-										<div class="input-append">
-											<input type="text" ng-model="candidateName" class="span4" />
-											<button ng-click="setAlert(false)" class="btn btn-danger" type="button">Try This</button>
-										</div> <!-- /.input-append -->
-			                        </div> <!-- /.alert -->
-			                        <div class="form-horizontal">
-			                            <div class="control-group" ng-repeat="issue in issues">
-			                                <label class="control-label">{{issue.name}}</label>
-			                                <div class="controls">
-			                                    <select ng-model="$parent.selectedStances[$index]" ng-change="updateRating()" ng-options="stance.effect as stance.description for stance in issue.stances">
-			                                        <option value="">What's your position?</option>
-			                                    </select>
-			                                </div>
-			                            </div> <!-- /.control-group -->
-			                        </div><!-- /.form-horizontal -->
-			                    </div> <!-- /.span6 -->
-			                    <div class="right span3 offset1">
-			                        <img src="img/ngpvan_lefty_large.png" />
-			                        <div class="approval">{{approvalRating}}% Approval Rating</div>
-			                        <div><progress percent="approvalRating" class="progress"></div> <span class="trend {{trend}}">{{trend}}</span>
-			                    </div> <!-- /.right -->
-			                </div> <!-- /.row -->
-						</div> <!-- /.span10 -->
-					</div> <!-- /.row -->
-				</div> <!-- /.hero-unit -->
+				<div class="span10 offset1">
+					<div class="hero-unit">
+						<div class="row">
+							<div class="span10">
+				                <div class="row">
+				                    <div class="span6">
+				                        <h2><div class="pull-left">{{candidateName}} on the Issues</div> </h2>
+				                        <div class="alert alert-error" ng-show="showAlert">
+											<a class="close" ng-click="setAlert(false)">&times;</a>
+				                            <p>You should really consider changing your name to something more phonetic.</p>
+											<div class="input-append">
+												<input type="text" ng-model="candidateName" class="span4" />
+												<button ng-click="setAlert(false)" class="btn btn-danger" type="button">Try This</button>
+											</div> <!-- /.input-append -->
+				                        </div> <!-- /.alert -->
+				                        <div class="form-horizontal">
+				                            <div class="control-group" ng-repeat="issue in issues">
+				                                <label class="control-label">{{issue.name}}</label>
+				                                <div class="controls">
+				                                    <select ng-model="$parent.selectedStances[$index]" ng-change="updateRating()" ng-options="stance.effect as stance.description for stance in issue.stances">
+				                                        <option value="">What's your position?</option>
+				                                    </select>
+				                                </div>
+				                            </div> <!-- /.control-group -->
+				                        </div><!-- /.form-horizontal -->
+				                    </div> <!-- /.span6 -->
+				                    <div class="right span3 offset1">
+				                        <img src="img/ngpvan_lefty_large.png" />
+				                        <div class="approval">{{approvalRating}}% Approval Rating</div>
+				                        <div><progress percent="approvalRating" class="progress"></div>
+				                        <div ng-hide="showAlert"><button ng-click="setAlert(true)" class="btn btn-inverse" type="button">Update Name</button></div>
+				                    </div> <!-- /.right -->
+				                </div> <!-- /.row -->
+							</div> <!-- /.span10 -->
+						</div> <!-- /.row -->
+					</div> <!-- /.hero-unit -->
+				</div> <!-- /.span10 -->
 			</div> <!-- /.row -->
             <div class="row">
-				<div class="hero-unit span4 offset4">
-					<h4>Built a winning campaign? Send it to us.</h4>
-						<form class="form-horizontal" action="umm">
-						<div class="input-append">
-							<input type="email" />
-							<input type="submit" class="btn btn-primary" value="Submit" />
-						</div>
-					</form>
-                </div> <!-- /.hero-unit -->
+				<div class="span4 offset4">
+					<div class="hero-unit">
+						<h4>Built a winning campaign? Send it to us.</h4>
+							<form class="form-horizontal" action="umm">
+							<div class="input-append">
+								<input type="email" class="span3" />
+								<input type="submit" class="btn btn-primary" value="Submit" />
+							</div>
+						</form>
+                	</div> <!-- /.hero-unit -->
+                </div> <!-- /.span4 -->
             </div> <!-- /.row -->
             <footer>
                 <div class="container">

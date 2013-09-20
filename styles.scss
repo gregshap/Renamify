@@ -99,5 +99,8 @@ section{
 }
 
 #secondScreen{
-	margin-left: -60px;
+	.hero-unit{
+		margin-left: -60px;
+		margin-right: -60px;
+	}
 }
