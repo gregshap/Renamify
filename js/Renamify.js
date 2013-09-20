@@ -1,6 +1,4 @@
 app.controller('mainController', function($scope){
-	$scope.alertName = {type: 'error', msg: 'You should consider changing your name. What does it even mean?'};
-	$scope.alerts = [$scope.alertName];
 	$scope.approvalRatingBase = 25;
 	$scope.approvalRating = null;
 	$scope.approvalClass = 'start';
@@ -10,18 +8,18 @@ app.controller('mainController', function($scope){
 		{name: 'Enviroment', stances: [{description: 'Chop down the trees', effect: -5}, {description: 'Imprison those who don\'t recycle', effect: 50}]}
 	];
 	$scope.selectedStances = [];
+	$scope.showAlert = true;
 	$scope.showFirstScreen = true;
 	$scope.showSecondScreen = false;
 	$scope.trend = 'none';
     $scope.init = function() {
     	$scope.approvalRating = $scope.approvalRatingBase;
     };
-    $scope.addAlert = function() {
-		$scope.alerts.push();
-	};
-
-	$scope.closeAlert = function(index) {
-		$scope.alerts.splice(index, 1);
+	$scope.alertOn = function(){
+		return $scope.showAlert;
+	}
+	$scope.showAlert = function(option) {
+		$scope.showAlert = option === false ? false : true;
 	};
     $scope.calculateApprovalRating = function(){
     	var change = 0;

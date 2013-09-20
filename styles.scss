@@ -17,6 +17,10 @@ footer{
 	}
 }
 
+h2{
+	@include clearfix;
+}
+
 html,body{
 	@include dimensions(100%,100%);
 }
@@ -25,10 +29,19 @@ section{
 	margin: 60px 0;
 }
 
+.hero-unit{
+		.alert{
+		p{
+			font-size: $baseFontSize;
+			line-height: $baseLineHeight;
+		}
+	}
+}
+
 .approval{
-	font-size: 85%;
+	font-size: $baseFontSize;
 	font-weight: 600;
-	line-height: 1;
+	line-height: $baseLineHeight;
 	margin: $baseLineHeight/2 0;
 }
 
@@ -50,6 +63,7 @@ section{
 }
 
 .right{
+	text-align: center;
 }
 
 .trend{
@@ -60,21 +74,30 @@ section{
 /* ==== PAGE STATES BASED ON APPROVAL RATING ==== */
 
 .abominable{
-	@include gradient-vertical($red, darken($red, 15%));
+	background: $red;
+	// @include gradient-vertical($red, darken($red, 15%));
 }
 
 .bad{
-	@include gradient-vertical($orange,darken($orange, 10%));	
+	background: $orange;
+	// @include gradient-vertical($orange,darken($orange, 10%));	
 }
 
 .good{
-	@include gradient-vertical($yellow, darken($yellow, 5%));	
+	background: $yellow;
+	// @include gradient-vertical($yellow, darken($yellow, 5%));	
 }
 
 .great{
-	@include gradient-vertical($green, darken($green, 15%));	
+	background: $green;
+	// @include gradient-vertical($green, darken($green, 15%));	
 }
 
 .start{
-	@include gradient-vertical($blue, darken($blue, 15%));
+	background: $blue;
+	// @include gradient-vertical($blue, darken($blue, 15%));
+}
+
+#secondScreen{
+	margin-left: -60px;
 }
