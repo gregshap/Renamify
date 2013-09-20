@@ -18,7 +18,7 @@ app.controller('mainController', function($scope){
 	$scope.alertOn = function(){
 		return $scope.showAlert;
 	}
-	$scope.showAlert = function(option) {
+	$scope.setAlert = function(option) {
 		$scope.showAlert = option === false ? false : true;
 	};
     $scope.calculateApprovalRating = function(){

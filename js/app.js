@@ -1,1 +1,1 @@
-var app = angular.module('Renamify',['ngSanitize','ui.bootstrap']);
+var app = angular.module('Renamify',['ui.bootstrap']);
