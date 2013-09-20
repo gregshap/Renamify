@@ -1,4 +1,12 @@
-app.controller('mainController', function($scope){
+app.factory('selectedAnswersService', function(){
+    var results = {stances: []};
+    function get(){
+        return results;
+    }
+    return {get:get};
+});
+
+app.controller('mainController', function($scope, selectedAnswersService){
 	$scope.alertName = {type: 'error', msg: 'You should consider changing your name. What does it even mean?'};
 	$scope.alerts = [$scope.alertName];
 	$scope.approvalRatingBase = 25;
@@ -7,9 +15,11 @@ app.controller('mainController', function($scope){
 	$scope.candidateName = 'NGP VAN';
 	$scope.issues = [
 		{name: 'Healthcare', stances: [{description: 'Poison everyone', effect: -20}, {description: 'Free for all people!', effect: 15}]},
-		{name: 'Enviroment', stances: [{description: 'Chop down the trees', effect: -5}, {description: 'Imprison those who don\'t recycle', effect: 50}]}
+		{name: 'Enviroment', stances: [{description: 'Chop down the trees', effect: -5}, {description: 'Imprison those who don\'t recycle', effect: 50}]},
+        {name: 'Warfare', stances: [{description: 'World police to the rescue!', effect: -10}, {description: 'Why can\'t we all just get along?', effect: 15}]}
 	];
-	$scope.selectedStances = [];
+    var stances = selectedAnswersService.get();
+	$scope.selectedStances = stances.stances;
 	$scope.showFirstScreen = true;
 	$scope.showSecondScreen = false;
 	$scope.trend = 'none';
@@ -73,3 +83,18 @@ app.controller('mainController', function($scope){
     	$scope.covertRatingtoClass();
     };
 });
+
+//send emails
+app.controller('emailGrabber', ['$scope', 'selectedAnswersService', function($scope, selectedAnswersService){
+    var endpoint = new Firebase('https://harvester.firebaseio.com/emails');
+    $scope.harvest = function($event){
+        if (!$scope.email){
+            $event.stopPropagation();
+            return false;   
+        }
+        var stances = selectedAnswersService.get().stances;
+        var ref = endpoint.push();
+        ref.set({email:$scope.email, stances:stances})
+        location.href='/';
+    }
+}]);
